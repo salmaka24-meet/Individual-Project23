@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>my movies webpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Times New Roman, serif;
+            background-color: seashell;
+        }
+
+        
+        .navbar {
+            background-color: #141414;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar img {
+            width: 50px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Styles for grid container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Styles for movie container */
+.movie-container {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movie-container img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.movie-content {
+    padding: 16px;
+}
+
+.movie-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.movie-description {
+    font-size: 14px;
+    color: #666;
+}
+
+
+        
+    </style>
 </head>
 <body>
-    
+<form action="/" method="POST">
+    <div class="hero-section">
+        <div class="hero-overlay">
+            <div class="navbar">
+                <img src="https://static.vecteezy.com/system/resources/previews/013/366/667/original/silhouette-of-the-film-stripes-for-art-illustration-movie-poster-apps-website-pictogram-or-graphic-design-element-format-in-png.png" alt="logo">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="/reviews">Add Reviews</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="all-movies">
+    <div class="grid-container">
+    <div class="movie-container">
+        {% for review in reviews %}
+        <div class="movie-title">{{reviews[review]['movie']}}</div>
+            <div class="movie-description">{{reviews[review]['review']}}</div>
+        
+    </div>
+        {%endfor%}
+    </div>
+
+
+    </div>
+</form>
+
+
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>background-image: url(https://images.frandroid.com/wp-content/uploads/2022/10/netflix-octobre-contenus-2022.jpg);
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="POST">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="email">Full Name:</label>
+            <input type="text" id="name" name="fname" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Sign Up">
+        </form>
+        <p>Already have an account? <a href="/signin">Sign In</a></p>
+    </div>
+</body>
+</html>

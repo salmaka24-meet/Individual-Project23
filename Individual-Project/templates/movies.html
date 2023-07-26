@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+					
+		@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+			
+			$background : #4338CA;
+			$color1 : rgba (249, 249, 249, 0.10);
+			$color2: #EAD8FF;
+
+			*{
+			  margin:0;
+			  font-family: Muli, sans-serif;
+			}
+
+			body{
+			  background: $background;
+			}
+			/*
+			.container{
+			  display:block;
+			  width:80%;
+			  margin:auto;
+			  padding:10px;
+			}
+			*/
+			/*
+			.grid-movies{
+			  display:grid;
+			  grid-template-columns: repeat(3, 1fr);
+			  grid-gap: 10px;
+			  grid-auto-rows: minmax(350px, auto);
+			}
+			*/
+			@mixin card($width, $height, $bg){
+			  display:block;
+			  width:$width;
+			  height:$height;
+			  background: $bg;
+			}
+
+			centrarbloque{
+			  position: absolute;
+			  left:50%;
+			  top: 50%;
+			  transform: translate(-50%, -50%);
+			 
+			}
+			/*
+			.card-movie{
+			  background: $color1;
+			  border-radius:10px;
+			  position:relative;
+			  overflow:hidden;
+			  display: grid;
+			  grid-template-rows:minmax(75%, auto);
+			  
+			  .card-head{
+			    grid-row: 1;
+			    position:relative;
+			    background-size:cover;
+			    background-repeat: no-repeat;
+			    a {
+			      display:block;
+			      height: 100%;
+			      width:100%;
+			      .material-icons{
+			        color:#fff;
+			        font-size:45px;
+			        @include centrarbloque;
+			        animation: icon-latido 0.5s infinite;
+			      }
+			     
+			    }
+			    
+			   
+			  }
+			  
+			  .card-content{
+			    padding: 10px;
+			    grid-row: 2;
+			    color:#fff;
+			    display: grid;
+			    grid-template-columns: 70% auto;
+			    
+			    .title{
+			      display: block;
+			      font-size: 14px;
+			      text-decoration: none;
+			      color:#fff;
+			    }
+			    .year, .gender{
+			      font-size: 11px;
+			    }
+			    .year, .rating{
+			      text-align: right;
+			    }
+			    
+			    &:hover{
+			     
+			      grid-row: 1/2;
+			    }
+			  }
+			  
+			  &:hover{
+			    background:#fff;
+			    .card-content, .title{
+			      color: $background;
+			      font-weight: bold;
+			    }
+			    .card-head .material-icons{
+			      animation: icon-play .10s linear infinite running;
+			    }
+			  }
+			 
+			 
+			}
+			*/
+
+			/*Animations*/
+
+			@keyframes icon-play{
+			  0%{
+			    font-size:25px;
+			  }
+			  100%{
+			    font-size: 180px;
+			    opacity: 0.1;
+			  }
+			  
+			}
+
+			@keyframes icon-latido{
+			    from { transform: translate(inherit); }
+			  50% { transform: translate(-50%,-50%) scale(1.4); }
+			    to { transform: translate(inherit); }
+			}
+
+	</style>
+	
+</head>
+
+
+<body>
+
+  <div class="container px-4 mx-auto mt-5">
+    <div id="grid-movies" class="grid grid-cols-4 gap-4"></div>
+  </div>
+
+  <script type="text/javascript">
+  	let grid = document.querySelector('#grid-movies')
+
+		let data = axios({
+		  method: "GET",
+		  url: "https://api.themoviedb.org/3/discover/movie",
+		  params:{
+		  api_key:"a2d9904250d328b23adfab101fdd3c49"
+		  }
+		})
+		.then(res=>{
+		  let movies = res.data.results;
+		  
+		  for(let movie of movies){
+		    
+		  grid.innerHTML += `<div class="grid h-72 shadow-2xl
+		 rounded-md overflow-hidden	border-2 border-indigo-300 border-opacity-0	hover:border-indigo-300 bg-indigo-600 grid-rows-2 relative" >
+		        <div class="row-span-2 col-span-1	bg-cover bg-no-repeat bg-center" style="background-image: url(https://image.tmdb.org/t/p/w500/${movie.poster_path});">
+		          <a href="#" class="absolute m-auto">
+		            <i class="material-icons text-white text-8xl hover:animate-ping">
+		              play_circle_outline
+		            </i>
+		          </a>
+		        </div>
+		        <div class="absolute text-white p-2 bottom-0 bg-gradient-to-t	from-gray-800 w-full">
+		          <a href="#" class="text-sm font-bold">${movie.title}</a>           
+		          <div class="text-xs">${movie.release_date}</div>                      
+		          <div class="flex justify-between text-xs relative w-full">
+		          <div class="bg-yellow-400 p-1 rounded-md">movies</div>
+		          <div class="absolute bg-red-500 rounded-full h-9 w-9 flex items-center justify-center bottom-0 right-0 px-5">
+		          ${movie.popularity}</div>
+		          </div>
+		        </div>
+		      </div>`
+		}
+		  
+		  
+		})
+
+
+  </script>
+
+
+</body>
+
+</html>

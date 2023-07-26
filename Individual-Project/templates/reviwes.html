@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="review-form">
+        <h2>Add Your Review</h2>
+        <form action="/reviews" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="movie" placeholder="Movie Name" required>
+                <label>Select Rating</label>
+                <input type="radio" name="number"  value="1">1 - Poor</option>
+                <input type="radio" name="number" value="2">2 - Fair</option>
+                <input type="radio" name="number" value="3">3 - Good</option>
+                <input type="radio" name="number" value="4">4 - Very Good</option>
+                <input type="radio" name="number" value="5">5 - Excellent</option>
+            <input type="text" name="review" placeholder="Your Review" required></textarea>
+            <input type="submit" value="Submit Review">
+        </form>
+    </div>
+
+    <div class="reviews-section">
+        <h2>Movie Reviews</h2>
+        {% for review in reviews %}
+        <div class="review">
+            <div class="review-header">
+                <span class="reviewer-name">{{ review['name'] }}</span>
+                <span class="movie-name">{{ review['movie'] }}</span>
+                <span class="rating">Rating: {{ review['rating'] }}/5</span>
+            </div>
+            <p class="review-text">{{ review['review'] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+
